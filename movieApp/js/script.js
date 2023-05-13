@@ -43,6 +43,9 @@ form.addEventListener("submit", (e) => {
 		}
 		movieDB.movies.push(inp.value);
 	}
+	if (checkbox.checked) {
+		console.log("Добавляем любимый фильм");
+	}
 	sortArr(movieDB.movies);
 	createMovieList(movieDB.movies, movieList);
 	form.reset();
@@ -68,7 +71,7 @@ const someChanges = () => {
 const createMovieList = (films, parent) => {
 	parent.innerHTML = "";
 
-	films.sort();
+	sortArr(films);
 
 	films.forEach((el, i) => {
 		parent.innerHTML += `
