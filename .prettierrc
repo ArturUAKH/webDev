@@ -2,6 +2,5 @@
   "tabWidth": 2,
   "useTabs": false,
   "trailingComma": "none",
-  "arrowParens": "avoid",
   "defaultParentheses": "avoid"
 }
