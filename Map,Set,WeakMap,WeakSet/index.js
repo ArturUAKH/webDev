@@ -64,3 +64,8 @@ const user = {
 
 const userMap = new Map(Object.entries(user));
 console.log(userMap);
+
+//Получаем object из мап
+
+let newObj = Object.fromEntries(userMap);
+console.log(newObj);
