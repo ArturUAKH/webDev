@@ -1,0 +1,41 @@
+@font-face{
+    font-family: 'Roboto-bold';
+    src:url('../fonts/Roboto-Bold.ttf');
+}
+@font-face{
+    font-family: 'Roboto-light';
+    src:url('../fonts/Roboto-Light.ttf');
+}
+@font-face{
+    font-family: 'Roboto-regular';
+    src:url('../fonts/Roboto-Regular.ttf');
+}
+*{
+    font-family: 'Roboto-regular', sans-serif;
+}
+header{
+    height: 50px;
+    background-color: #212121;
+}
+.menu{
+    display: flex;
+    justify-content: space-between;
+    padding: 13px 70px;
+    margin: 0;
+    list-style: none;
+}
+.menu .menu__item{
+    padding-right: 28px;
+    border-right: 2px dotted black;
+}
+.menu .menu__link{
+    font-family: 'Roboto-light';
+    font-weight: 300;
+    font-size: 15px;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+.subheader{
+    height: 87px;
+    background-color: rgba(0, 0, 0, .6)
+}
