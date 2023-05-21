@@ -61,6 +61,20 @@ const obj2 = {
         const say = () => {
             console.log(this);
         };
+        say();
     }
 };
 obj2.show();
+
+//Контекст в событии это элемент на котором произошло событие
+
+const btn = document.querySelector("button");
+
+btn.addEventListener("click", function (e) {
+    this.style.background = "red";
+    console.log(this);
+});
+//Котекст потерян т.к. стрелочная функция не понимает this
+// btn.addEventListener("click", (e) => {
+//     this.style.background = "red";
+// });
