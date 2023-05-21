@@ -74,7 +74,7 @@ btn.addEventListener("click", function (e) {
     this.style.background = "red";
     console.log(this);
 });
-//Котекст потерян т.к. стрелочная функция не понимает this
+//Котекст потерян т.к. стрелочная функция не понимает this но понимает e.target.
 // btn.addEventListener("click", (e) => {
 //     this.style.background = "red";
 // });
