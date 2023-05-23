@@ -214,4 +214,44 @@ window.addEventListener("DOMContentLoaded", () => {
         15,
         ".menu .container"
     ).render();
+    // Создаем Ajax запрос используя локальный сервер MAMP
+    // При работе с FormData у каждого инпута формы должен быть аттрибут name='C либым значение' чтоб корректно собирать данные
+    const forms = document.querySelectorAll("form");
+    // Обьект сообщений со статусом запроса для вывода пользователю на разных этапах запроса
+    const message = {
+        loading: "Загрузка",
+        succes: "Спасибо мы скоро с Вами свяжемся...",
+        failure: "Что-то пошло не так..."
+    };
+    forms.forEach((item) => {
+        postData(item);
+    });
+
+    function postData(form) {
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const statusMessage = document.createElement("div");
+            statusMessage.classList.add("status");
+            statusMessage.textContent = message.loading;
+            form.append(statusMessage);
+
+            const req = new XMLHttpRequest();
+            req.open("POST", "server.php");
+
+            const formData = new FormData(form);
+            //Для корректной FormData настраивать заголовки не нужно
+            // req.setRequestHeader("Content-type", "multipart/form-data");
+            req.send(formData);
+
+            req.addEventListener("load", () => {
+                if (req.status === 200) {
+                    console.log(req.response);
+                    statusMessage.textContent = message.succes;
+                } else {
+                    statusMessage.textContent = message.failure;
+                }
+            });
+        });
+    }
 });
