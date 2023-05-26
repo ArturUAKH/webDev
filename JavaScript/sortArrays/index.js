@@ -60,7 +60,7 @@ const newArr = Object.entries(testObj)
     .filter((item) => item[1] === "person")
     .map((item) => item[0]);
 console.log(newArr);
-
+//Применяем указанные методы
 const films = [
     {
         name: "Titanic",
@@ -105,3 +105,30 @@ const checkFilms = (arr) =>
     arr.every((film) => (film.id || film.id === 0 ? true : false));
 
 console.log(checkFilms(transformedArray));
+
+const funds = [
+    { amount: -1400 },
+    { amount: 2400 },
+    { amount: -1000 },
+    { amount: 500 },
+    { amount: 10400 },
+    { amount: -11400 }
+];
+
+const getTotalIncomeAmount = (data) => {
+    data.some((item) => item.amount < 0)
+        ? data.reduce((acc, curr) => acc + curr.amount, 0)
+        : getTotalIncomeAmount(data);
+};
+
+getTotalIncomeAmount(funds);
+
+console.log(-1400 + 2400 + -1000 + 500 + 10400 + -11400);
+
+const getPositiveIncomeAmount = (data) => {
+    return data
+        .filter((item) => item.amount > 0)
+        .reduce((acc, curr) => acc + curr.amount, 0);
+};
+
+console.log(getPositiveIncomeAmount(funds));
