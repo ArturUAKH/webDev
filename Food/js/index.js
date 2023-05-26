@@ -236,24 +236,47 @@ window.addEventListener("DOMContentLoaded", () => {
             `;
             form.insertAdjacentElement("afterend", statusMessage);
 
-            const req = new XMLHttpRequest();
-            req.open("POST", "server.php");
-
             const formData = new FormData(form);
+            //Создаем обьект из formData т.к. напрямую превратить в JSON его нельзя
+            const obj = {};
+            formData.forEach((value, key) => {
+                obj[key] = value;
+                console.log(key, value);
+            });
+
+            fetch("server.php", {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify(obj) // тут обьект созданный из formData ужеможно превратить в JSON и отправить
+            })
+                .then((data) => data.text()) //Return не нужен т.к. функция в одну строку в других случаях Return обязателен
+                .then((data) => {
+                    console.log(data);
+                    showThanksModal(message.succes);
+                    statusMessage.remove();
+                })
+                .catch(() => {
+                    showThanksModal(message.failure);
+                })
+                .finally(() => {
+                    form.reset();
+                });
+
             //Для корректной FormData настраивать заголовки не нужно
             // req.setRequestHeader("Content-type", "multipart/form-data");
-            req.send(formData);
 
-            req.addEventListener("load", () => {
-                if (req.status === 200) {
-                    console.log(req.response);
-                    showThanksModal(message.succes);
-                    form.reset();
-                    statusMessage.remove();
-                } else {
-                    showThanksModal(message.failure);
-                }
-            });
+            // req.addEventListener("load", () => {
+            //     if (req.status === 200) {
+            //         console.log(req.response);
+            //         showThanksModal(message.succes);
+            //         form.reset();
+            //         statusMessage.remove();
+            //     } else {
+            //         showThanksModal(message.failure);
+            //     }
+            // });
         });
     }
     //Модифицируем модалку благодарности и вставляем спиннер загрузки
