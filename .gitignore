@@ -1,7 +1,11 @@
+# Игнорировать папку node_modules
 node_modules/
-/.pnp
-.pnp.js
 
-/coverage
+# Игнорировать временные файлы и папки
+*~
+.DS_Store
+Thumbs.db
 
-/build
+# Игнорировать файлы конфигурации IDE
+.idea/
+.vscode/
