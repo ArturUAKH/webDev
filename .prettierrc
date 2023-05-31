@@ -1,6 +1,7 @@
 {
-  "tabWidth": 4,
-  "useTabs": false,
-  "trailingComma": "none",
-  "defaultParentheses": "avoid"
+    "tabWidth": 4,
+    "useTabs": false,
+    "trailingComma": "none",
+    "defaultParentheses": "avoid",
+    "arrowParens": "avoid"
 }

@@ -7,10 +7,10 @@ window.addEventListener("DOMContentLoaded", () => {
         wrapper = document.querySelector(".tabheader__items");
     hideContent();
     function hideContent() {
-        tabs.forEach((item) => {
+        tabs.forEach(item => {
             item.classList.remove("tabheader__item_active");
         });
-        tabsContent.forEach((item) => {
+        tabsContent.forEach(item => {
             item.classList.add("hide");
         });
     }
@@ -21,7 +21,7 @@ window.addEventListener("DOMContentLoaded", () => {
         tabsContent[i].classList.add("show", "fade");
     }
 
-    wrapper.addEventListener("click", (e) => {
+    wrapper.addEventListener("click", e => {
         let target = e.target;
         if (target && target.classList.contains("tabheader__item")) {
             tabs.forEach((item, i) => {
@@ -126,17 +126,17 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const modalTimerId = setTimeout(openModal, 50000);
 
-    modalTrigger.forEach((btn) => {
+    modalTrigger.forEach(btn => {
         btn.addEventListener("click", openModal);
     });
 
-    modal.addEventListener("click", (e) => {
+    modal.addEventListener("click", e => {
         if (e.target === modal || e.target.getAttribute("data-close") == "") {
             closeModal();
         }
     });
 
-    window.addEventListener("keydown", (e) => {
+    window.addEventListener("keydown", e => {
         if (e.code === "Escape" && modal.classList.contains("show")) {
             closeModal();
         }
@@ -167,7 +167,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 this.el = "menu__item";
                 el.classList.add(this.el);
             } else {
-                this.classes.forEach((className) => {
+                this.classes.forEach(className => {
                     el.classList.add(className);
                 });
             }
@@ -185,14 +185,14 @@ window.addEventListener("DOMContentLoaded", () => {
             this.parent.append(el);
         }
     }
-    const getResource = async (url) => {
+    const getResource = async url => {
         const res = await fetch(url);
         if (!res.ok) {
             throw new Error(`Could no fetch-${url} status - ${res.status}`);
         }
         return await res.json();
     };
-    getResource("http://localhost:3000/menu").then((data) => {
+    getResource("http://localhost:3000/menu").then(data => {
         data.forEach(({ img, altimg, title, descr, price }) => {
             new Menucard(
                 img,
@@ -212,7 +212,7 @@ window.addEventListener("DOMContentLoaded", () => {
         succes: "Спасибо мы скоро с Вами свяжемся...",
         failure: "Что-то пошло не так..."
     };
-    forms.forEach((item) => {
+    forms.forEach(item => {
         bindPostData(item);
     });
     //Модифицировали запросы на fetch с использованием async/await
@@ -228,7 +228,7 @@ window.addEventListener("DOMContentLoaded", () => {
         return await res.json();
     };
     function bindPostData(form) {
-        form.addEventListener("submit", (e) => {
+        form.addEventListener("submit", e => {
             e.preventDefault();
 
             const statusMessage = document.createElement("img");
@@ -244,7 +244,7 @@ window.addEventListener("DOMContentLoaded", () => {
             const json = JSON.stringify(Object.fromEntries(formData.entries()));
 
             postData("http://localhost:3000/requests", json)
-                .then((data) => {
+                .then(data => {
                     console.log(data);
                     showThanksModal(message.succes);
                     statusMessage.remove();
@@ -282,6 +282,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
     //Создаем слайдер
     const slides = document.querySelectorAll(".offer__slide"),
+        slider = document.querySelector(".offer__slider"),
         prev = document.querySelector(".offer__slider-prev"),
         next = document.querySelector(".offer__slider-next"),
         current = document.querySelector("#current"),
@@ -293,6 +294,19 @@ window.addEventListener("DOMContentLoaded", () => {
 
     let slideIndex = 1;
     let offset = 0;
+
+    const currentDot = arrDots => {
+        arrDots.forEach(dot => (dot.style.opacity = "0.5"));
+        arrDots[slideIndex - 1].style.opacity = "1";
+    };
+
+    const currentSlideCounter = () => {
+        if (slides.length < 10) {
+            current.textContent = `0${slideIndex}`;
+        } else {
+            current.cssText = slideIndex;
+        }
+    };
 
     if (slides.length < 10) {
         current.textContent = `0${slideIndex}`;
@@ -309,10 +323,28 @@ window.addEventListener("DOMContentLoaded", () => {
     `;
 
     slidesWrapper.style.overflow = "hidden";
-    slides.forEach((slide) => {
-        console.log(width);
+
+    slides.forEach(slide => {
         slide.style.width = width;
     });
+
+    slider.style.position = "relative";
+
+    const indicators = document.createElement("ol"),
+        dots = [];
+    indicators.classList.add("carousel-indicators");
+    slider.append(indicators);
+
+    for (let i = 0; i < slides.length; i++) {
+        const dot = document.createElement("li");
+        dot.setAttribute("data-slide-to", i + 1);
+        dot.classList.add("dot");
+        if (i == 0) {
+            dot.style.opacity = "1";
+        }
+        indicators.append(dot);
+        dots.push(dot);
+    }
 
     next.addEventListener("click", () => {
         if (offset == parseInt(width) * (slides.length - 1)) {
@@ -328,11 +360,8 @@ window.addEventListener("DOMContentLoaded", () => {
             slideIndex++;
         }
 
-        if (slides.length < 10) {
-            current.textContent = `0${slideIndex}`;
-        } else {
-            current.cssText = slideIndex;
-        }
+        currentSlideCounter();
+        currentDot(dots);
     });
 
     prev.addEventListener("click", () => {
@@ -350,11 +379,21 @@ window.addEventListener("DOMContentLoaded", () => {
 
         sliderField.style.transform = `translateX(-${offset}px)`;
 
-        if (slides.length < 10) {
-            current.textContent = `0${slideIndex}`;
-        } else {
-            current.textContent = slideIndex;
-        }
+        currentSlideCounter();
+        currentDot(dots);
+    });
+
+    dots.forEach(dot => {
+        dot.addEventListener("click", e => {
+            const slideTo = e.target.getAttribute("data-slide-to");
+            slideIndex = slideTo;
+            offset = parseInt(width) * (slideTo - 1);
+
+            sliderField.style.transform = `translateX(-${offset}px)`;
+
+            currentDot(dots);
+            currentSlideCounter();
+        });
     });
     // const slides = document.querySelectorAll(".offer__slide"),
     //     prev = document.querySelector(".offer__slider-prev"),
