@@ -1,16 +1,16 @@
 "use strict";
 
 const persone = {
-   name: "Alex",
-   age: 25,
+    name: "Alex",
+    age: 25,
 
-   get userAge() {
-      return this.age;
-   },
+    get userAge() {
+        return this.age;
+    },
 
-   set userAge(num) {
-      this.age = num;
-   }
+    set userAge(num) {
+        this.age = num;
+    }
 };
 //При вызове get,set круглые скобки не ставятся
 console.log(persone.userAge); //25
