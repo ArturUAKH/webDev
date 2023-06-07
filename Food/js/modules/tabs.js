@@ -1,40 +1,45 @@
-function tabs() {
-    //Создаем логику по переключению табов !
+function tabs(
+	tabsSelector,
+	tabsContentSelector,
+	tabsParentSelector,
+	classActive
+) {
+	//Создаем логику по переключению табов !
 
-    const tabs = document.querySelectorAll(".tabheader__item"),
-        tabsContent = document.querySelectorAll(".tabcontent"),
-        wrapper = document.querySelector(".tabheader__items");
+	const tabs = document.querySelectorAll(tabsSelector),
+		tabsContent = document.querySelectorAll(tabsContentSelector),
+		tabsParent = document.querySelector(tabsParentSelector);
 
-    function hideContent() {
-        tabs.forEach(item => {
-            item.classList.remove("tabheader__item_active");
-        });
+	function hideContent() {
+		tabs.forEach(item => {
+			item.classList.remove(classActive);
+		});
 
-        tabsContent.forEach(item => {
-            item.classList.add("hide");
-        });
-    }
+		tabsContent.forEach(item => {
+			item.classList.add("hide");
+		});
+	}
 
-    function showContent(i = 0) {
-        tabs[i].classList.add("tabheader__item_active");
-        tabsContent[i].classList.add("show", "fade");
-        tabsContent[i].classList.remove("hide");
-    }
+	function showContent(i = 0) {
+		tabs[i].classList.add(classActive);
+		tabsContent[i].classList.add("show", "fade");
+		tabsContent[i].classList.remove("hide");
+	}
 
-    hideContent();
-    showContent();
+	hideContent();
+	showContent();
 
-    wrapper.addEventListener("click", e => {
-        let target = e.target;
-        if (target && target.classList.contains("tabheader__item")) {
-            tabs.forEach((item, i) => {
-                if (target == item) {
-                    hideContent();
-                    showContent(i);
-                }
-            });
-        }
-    });
+	tabsParent.addEventListener("click", e => {
+		let target = e.target;
+		if (target && target.classList.contains(tabsSelector.slice(1))) {
+			tabs.forEach((item, i) => {
+				if (target == item) {
+					hideContent();
+					showContent(i);
+				}
+			});
+		}
+	});
 }
 
-module.exports = tabs;
+export default tabs;

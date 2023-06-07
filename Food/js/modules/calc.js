@@ -17,7 +17,7 @@ function calc() {
     }
 
     function initLocalSettings(selector, activeClass) {
-        elements = document.querySelectorAll(`${selector}`);
+        const elements = document.querySelectorAll(`${selector}`);
 
         elements.forEach(elem => {
             elem.classList.remove(activeClass);
@@ -57,7 +57,7 @@ function calc() {
     calcTotal();
 
     function getStaticInformation(parentSelector, activeClass) {
-        const elements = document.querySelectorAll(`${parentSelector} div`);
+        const elements = document.querySelectorAll(`${parentSelector}`);
 
         elements.forEach(elem => {
             elem.addEventListener("click", e => {
@@ -81,13 +81,13 @@ function calc() {
         });
     }
     getStaticInformation(
-        ".calculating__choose_big",
+        ".calculating__choose_big div",
         "calculating__choose-item_active"
     );
-    getStaticInformation("#gender", "calculating__choose-item_active");
+    getStaticInformation("#gender div", "calculating__choose-item_active");
 
     function getDynamicInformation(selector) {
-        inputs = document.querySelectorAll(`${selector} input`);
+        const inputs = document.querySelectorAll(`${selector} input`);
 
         inputs.forEach(inp => {
             inp.addEventListener("input", () => {
@@ -114,4 +114,4 @@ function calc() {
     }
     getDynamicInformation(".calculating__choose_medium");
 }
-module.exports = calc;
+export default calc;
