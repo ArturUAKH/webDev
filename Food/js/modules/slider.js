@@ -1,13 +1,22 @@
-function slider() {
+function slider({
+    slidesSel,
+    sliderSel,
+    prevSel,
+    nexSel,
+    currSel,
+    totalSel,
+    wrapperSel,
+    fieldSel
+}) {
     //Создаем слайдер
-    const slides = document.querySelectorAll(".offer__slide"),
-        slider = document.querySelector(".offer__slider"),
-        prev = document.querySelector(".offer__slider-prev"),
-        next = document.querySelector(".offer__slider-next"),
-        current = document.querySelector("#current"),
-        total = document.querySelector("#total"),
-        slidesWrapper = document.querySelector(".offer__slider-wrapper"),
-        sliderField = slidesWrapper.querySelector(".offer__slider-inner"),
+    const slides = document.querySelectorAll(slidesSel),
+        slider = document.querySelector(sliderSel),
+        prev = document.querySelector(prevSel),
+        next = document.querySelector(nexSel),
+        current = document.querySelector(currSel),
+        total = document.querySelector(totalSel),
+        slidesWrapper = document.querySelector(wrapperSel),
+        sliderField = slidesWrapper.querySelector(fieldSel),
         //Меиод getComputedStyle работает на обьекте window
         width = window.getComputedStyle(slidesWrapper).width;
 
