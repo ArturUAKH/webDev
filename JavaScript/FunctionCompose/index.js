@@ -35,7 +35,7 @@ console.log([1, 2] + 1);
 
 //Еще пример с вычислением скидки
 //prettier-ignore
-const composeDisc = (...fns) => x => fns.reduceRight((acc, curr) => curr(acc),0);
+const composeDisc = (...fns) => x => fns.reduceRight((res, foo) => foo(res), x);
 
 const divineTest = price => {
   return price / 100;
@@ -46,3 +46,7 @@ const multiplyTest = price => {
 };
 
 const addPrefiks = price => '$' + price;
+
+let result = composeDisc(addPrefiks, multiplyTest, divineTest);
+
+console.log(result(200));
