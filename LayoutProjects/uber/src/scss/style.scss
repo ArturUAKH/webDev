@@ -20,6 +20,10 @@ $ligth_red: #ff5656;
    font-weight: 300;
    text-transform: uppercase;
    text-align: center;
+   &_white {
+      color: #000000;
+      background-color: #fff;
+   }
 }
 @font-face {
    font-family: 'Roboto-bold';
@@ -378,6 +382,54 @@ nav {
                background: url(../icons/iconCheck_red.png) center center/cover no-repeat;
             }
          }
+      }
+   }
+}
+.world {
+   position: relative;
+   min-height: 717px;
+   padding: 49px 0;
+   background: url(../img/bg/map.jpg) center center/cover no-repeat;
+   .label {
+      width: 75px;
+      font-weight: bold;
+   }
+   .title {
+      color: #fff;
+      font-size: 38px;
+      font-weight: bold;
+   }
+   .subtitle {
+      color: #fff;
+      font-weight: 400;
+   }
+   a {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 49px;
+      color: $blue_color;
+      text-align: center;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 68px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: 0.3s all;
+      &:hover {
+         color: #fff;
+      }
+   }
+}
+footer {
+   padding: 10px 0;
+   .footer {
+      &_divider {
+         width: 301px;
+         height: 4px;
+         background-color: $blue_color;
+         border-radius: 2px;
+         margin: 0 auto;
       }
    }
 }

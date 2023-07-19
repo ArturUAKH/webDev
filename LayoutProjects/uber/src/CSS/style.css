@@ -189,6 +189,10 @@ nav {
   text-transform: uppercase;
   text-align: center;
 }
+.label_white {
+  color: #000000;
+  background-color: #fff;
+}
 
 .reasons {
   padding: 71px 0 65px 0;
@@ -400,4 +404,54 @@ nav {
 }
 .require .warning .require_list li:before {
   background: url(../icons/iconCheck_red.png) center center/cover no-repeat;
+}
+
+.world {
+  position: relative;
+  min-height: 717px;
+  padding: 49px 0;
+  background: url(../img/bg/map.jpg) center center/cover no-repeat;
+}
+.world .label {
+  width: 75px;
+  font-weight: bold;
+}
+.world .title {
+  color: #fff;
+  font-size: 38px;
+  font-weight: bold;
+}
+.world .subtitle {
+  color: #fff;
+  font-weight: 400;
+}
+.world a {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  bottom: 49px;
+  color: #1eacc7;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 68px;
+  text-transform: uppercase;
+  text-decoration: none;
+  -webkit-transition: 0.3s all;
+  transition: 0.3s all;
+}
+.world a:hover {
+  color: #fff;
+}
+
+footer {
+  padding: 10px 0;
+}
+footer .footer_divider {
+  width: 301px;
+  height: 4px;
+  background-color: #1eacc7;
+  border-radius: 2px;
+  margin: 0 auto;
 }/*# sourceMappingURL=style.css.map */
